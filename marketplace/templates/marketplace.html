@@ -1,0 +1,212 @@
+{% extends "main.html" %}
+
+{% block title %}
+Marketplace | Area360
+{% endblock title %}
+
+{% block body %}
+<h2 class="h2-responsive text-center my-5">Marketplace</h2>
+<div class="container-fluid text-center">
+    <form action="#" method="post" class="p-5" style="background-color: rgba(0, 0, 0, 0.025);">
+        {% csrf_token %}
+        <h3 class="h3-responsive text-center mb-5">Search properties</h3>
+        <div class="row mb-4">
+            <div class="col">
+                <label for="">Property type</label>
+                <div class="md-form">
+                    <select name="options" id="select" class="browser-default md-select form-control">
+                        <option value="" disabled selected>Choose property type</option>
+                        <option value="1">Apartment</option>
+                        <option value="2">Farm house</option>
+                        <option value="3">Flate</option>
+                        <option value="4">Warehouse</option>
+                        <option value="5">Plot</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <label for="">Purpose</label>
+                <div class="md-form">
+                    <select name="options" id="select" class="browser-default md-select form-control">
+                        <option value="" disabled selected>Buy or rent</option>
+                        <option value="1">Buy</option>
+                        <option value="2">Rent</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div class="col">
+                <label for="">Country</label>
+                <div class="md-form">
+                    <select name="options" id="select" class="browser-default md-select form-control">
+                        <option value="" disabled selected>Choose your country</option>
+                        <option value="1">India</option>
+                        <option value="2">USA</option>
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </select>
+                </div>
+            </div> -->
+            <div class="col">
+                <label for="">State</label>
+                <div class="md-form">
+                    <select name="options" id="select" class="browser-default md-select form-control">
+                        <option value="" disabled selected>Choose your state</option>
+                        <option value="1">Gujarat</option>
+                        <option value="2">MP</option>
+                        <option value="3">UP</option>
+                        <option value="4">Panjab</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <label for="">City</label>
+                <div class="md-form">
+                    <select name="options" id="select" class="browser-default md-select form-control">
+                        <option value="" disabled selected>Choose your city</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                        <option value="4">Option 4</option>
+                        <option value="5">Option 5</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-lg btn-floating"><i class="fas fa-search"></i></button>
+    </form>
+</div>
+
+<div class="container p-3">
+    <div class="row row-cols-1 row-cols-md-5 g-4 mt-3">
+          <div class="col">
+                <div class="card h-100">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top"
+                            alt="Skyscrapers" />
+                      <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <span class="badge badge-primary">Sell</span>
+                            <span class="badge badge-secondary">Apartment</span>
+                            <p class="card-text mt-2">
+                                  $10000
+                            </p>
+                      </div>
+                      <a class="btn btn-primary" href="{% url 'property' %}">Read more</a>
+                </div>
+          </div>
+          <div class="col">
+                <div class="card h-100">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp" class="card-img-top"
+                            alt="Los Angeles Skyscrapers" />
+                      <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <span class="badge badge-primary">Sell</span>
+                            <span class="badge badge-secondary">Apartment</span>
+                            <p class="card-text mt-2">
+                                  $10000
+                            </p>
+                      </div>
+                      <a class="btn btn-primary" href="{% url 'property' %}">Read more</a>
+                </div>
+          </div>
+          <div class="col">
+                <div class="card h-100">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top"
+                            alt="Palm Springs Road" />
+                      <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <span class="badge badge-primary">Sell</span>
+                            <span class="badge badge-secondary">Apartment</span>
+                            <p class="card-text mt-2">
+                                  $10000
+                            </p>
+                      </div>
+                      <a class="btn btn-primary" href="{% url 'property' %}">Read more</a>
+
+                </div>
+          </div>
+          <div class="col">
+                <div class="card">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp"
+                            class="card-img-top hover-zoom" alt="Palm Springs Road" />
+                      <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <span class="badge badge-primary">Rent</span>
+                            <span class="badge badge-secondary">Apartment</span>
+                            <p class="card-text mt-2">
+                                  $10000
+                            </p>
+                      </div>
+                      <a class="btn btn-primary" href="{% url 'property' %}">Read more</a>
+
+                </div>
+          </div>
+          <div class="col">
+                <div class="card">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp"
+                            class="card-img-top hover-zoom" alt="Palm Springs Road" />
+                      <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <span class="badge badge-primary">Rent</span>
+                            <span class="badge badge-secondary">Apartment</span>
+                            <p class="card-text mt-2">
+                                  $10000
+                            </p>
+                      </div>
+                      <a class="btn btn-primary" href="{% url 'property' %}">Read more</a>
+
+                </div>
+          </div>
+          <div class="col">
+                <div class="card">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp"
+                            class="card-img-top hover-zoom" alt="Palm Springs Road" />
+                      <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <span class="badge badge-primary">Rent</span>
+                            <span class="badge badge-secondary">Apartment</span>
+                            <p class="card-text mt-2">
+                                  $10000
+                            </p>
+                      </div>
+                      <a class="btn btn-primary" href="{% url 'property' %}">Read more</a>
+
+                </div>
+          </div>
+          <div class="col">
+                <div class="card">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp"
+                            class="card-img-top hover-zoom" alt="Palm Springs Road" />
+                      <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <span class="badge badge-primary">Rent</span>
+                            <span class="badge badge-secondary">Apartment</span>
+                            <p class="card-text mt-2">
+                                  $10000
+                            </p>
+                      </div>
+                      <a class="btn btn-primary" href="{% url 'property' %}">Read more</a>
+
+                </div>
+          </div>
+          <div class="col">
+                <div class="card">
+                      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp"
+                            class="card-img-top hover-zoom" alt="Palm Springs Road" />
+                      <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <span class="badge badge-primary">Rent</span>
+                            <span class="badge badge-secondary">Apartment</span>
+                            <p class="card-text mt-2">
+                                  $10000
+                            </p>
+                      </div>
+                      <a class="btn btn-primary" href="{% url 'property' %}">Read more</a>
+
+                </div>
+          </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+{% endblock body %}

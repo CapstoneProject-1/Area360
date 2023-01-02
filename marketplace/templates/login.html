@@ -1,0 +1,46 @@
+{% extends "main.html" %}
+
+{% block title %}
+  Login | Area360
+{% endblock title %}
+
+{% block body %}
+<div class="container-sm my-5 w-25 btn-outline-light p-4">
+  <h2 class="h2-responsive text-center mb-5">Welcome back</h2>
+  <form action="#" method="post">
+      {% csrf_token %}
+      
+      <!-- Email input -->
+      <div class="input-group mb-4">
+          <input type="email" class="form-control" placeholder="Email id" aria-label="Email id" required/>
+      </div>
+      <!-- Password input -->
+      <div class="input-group mb-4">
+          <input type="password" class="form-control" placeholder="Password" aria-label="Password" required/>
+      </div>
+
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-4">Login</button>
+
+      <!-- Register buttons -->
+      <!-- <div class="text-center">
+    <p>or sign up with:</p>
+    <button type="button" class="btn btn-secondary btn-floating mx-1">
+      <i class="fab fa-facebook-f"></i>
+    </button>
+
+    <button type="button" class="btn btn-secondary btn-floating mx-1">
+      <i class="fab fa-google"></i>
+    </button>
+
+    <button type="button" class="btn btn-secondary btn-floating mx-1">
+      <i class="fab fa-twitter"></i>
+    </button>
+
+    <button type="button" class="btn btn-secondary btn-floating mx-1">
+      <i class="fab fa-github"></i>
+    </button>
+  </div> -->
+  </form>
+</div>
+{% endblock body %}
