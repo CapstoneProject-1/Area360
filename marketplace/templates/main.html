@@ -26,6 +26,7 @@
   <!-- <link rel="stylesheet" href="{% static 'css/mdb.dark.min.css' %}" /> -->
   <link rel="stylesheet" href="{% static 'css/mdb.rtl.min.css' %}" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  
 </head>
 
 <body>
@@ -50,24 +51,24 @@
           <!-- Left links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item me-2">
-              <a class="nav-link" href="{% url 'index' %}">Home</a>
+              <a class="nav-link" href="{% url 'realestate:index' %}">Home</a>
             </li>
             <li class="nav-item me-2">
-              <a class="nav-link" href="{% url 'marketplace' %}">Marketplace</a>
+              <a class="nav-link" href="{% url 'realestate:marketplace' %}">Marketplace</a>
             </li>
             <li class="nav-item me-2">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
+              <a class="nav-link" href="{% url 'realestate:about' %}">About</a>
             </li>
             <li class="nav-item me-2">
-              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+              <a class="nav-link" href="{% url 'realestate:contact' %}">Contact</a>
             </li>
           </ul>
           <!-- Left links -->
           <div class="d-flex align-items-center">
-            <a type="button" class="btn btn-secondary px-3 me-2" href="{% url 'login' %}">
+            <a type="button" class="btn btn-secondary px-3 me-2" href="{% url 'realestate:login' %}">
               Login
             </a>
-            <a type="button" class="btn btn-primary me-3" href="{% url 'register' %}">
+            <a type="button" class="btn btn-primary me-3" href="{% url 'realestate:register' %}">
               Signup
             </a>
           </div>
@@ -128,12 +129,8 @@
     <!-- Navbar -->
 
 
-
-
     {% block body %}
     {% endblock body %}
-
-
 
 
     <!-- Footer -->
@@ -183,19 +180,19 @@
                 Useful links
               </h6>
               <p>
-                <a href="{% url 'index' %}" class="text-reset">Home</a>
+                <a href="{% url 'realestate:index' %}" class="text-reset">Home</a>
               </p>
               <p>
-                <a href="{% url 'about' %}" class="text-reset">About</a>
+                <a href="{% url 'realestate:about' %}" class="text-reset">About</a>
               </p>
               <p>
-                <a href="{% url 'contact' %}" class="text-reset">Contact</a>
+                <a href="{% url 'realestate:contact' %}" class="text-reset">Contact</a>
               </p>
               <p>
-                <a href="{% url 'privacypolicy' %}" class="text-reset">Privacy Policy</a>
+                <a href="{% url 'realestate:privacypolicy' %}" class="text-reset">Privacy Policy</a>
               </p>
               <p>
-                <a href="{% url 'tc' %}" class="text-reset">Terms & conditions</a>
+                <a href="{% url 'realestate:tc' %}" class="text-reset">Terms & conditions</a>
               </p>
             </div>
             <!-- Grid column -->
@@ -235,10 +232,7 @@
             <!-- Linkedin -->
             <a class="btn text-white btn-floating m-1" style="background-color: #0082ca;" href="#!" role="button"><i
                 class="fab fa-linkedin-in"></i></a>
-            <!-- Github -->
-            <a class="btn text-white btn-floating m-1" style="background-color: #333333;" href="#!" role="button"><i
-                class="fab fa-github"></i></a>
-
+    
           </section>
           <!-- Section: Social media -->
           <!-- Grid row -->
@@ -257,6 +251,10 @@
 
   <!-- MDB -->
   <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+
+  <!-- sweetalert -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
   <!-- Custom scripts -->
   <script type="text/javascript" sec="{% static 'js/script.js' %}"></script>
 </body>
