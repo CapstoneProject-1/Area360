@@ -1,4 +1,4 @@
-# from django.conf import settings
+from django.conf import settings
 # from twilio.rest import Client
 from .models import *
 
@@ -42,11 +42,11 @@ from twilio.rest import Client
 
 def send_otp_code(phone_number, otp_code):
     # Your Twilio Account SID and Auth Token
-    account_sid = 'AC81c847752bdb95277a90b4055cf12111'
-    auth_token = 'acac6df1c11a9d351044769d7ba6cf0b'
+    account_sid = 'settings.ACCOUNT_SID'
+    auth_token = 'settings.AUTH_TOKEN'
 
     # Your Twilio phone number
-    from_phone_number = '+12673148248'
+    from_phone_number = 'settings.PHONE_NUMBER'
 
     client = Client(account_sid, auth_token)
     message = client.messages.create(
