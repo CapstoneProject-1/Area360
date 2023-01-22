@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from decouple import Config
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -144,6 +145,6 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ACCOUNT_SID = Config('ACCOUNT_SID')
-AUTH_TOKEN = Config('AUTH_TOKEN')
-PHONE_NUMBER = Config('PHONE_NUMBER')
+ACCOUNT_SID = 'AC81c847752bdb95277a90b4055cf12111'
+AUTH_TOKEN = 'acac6df1c11a9d351044769d7ba6cf0b'
+PHONE_NUMBER = '+12673148248'

@@ -46,7 +46,7 @@ def register(request):
                 otp = str(random.randrange(1000,9999))
                 profile_obj = Profile.objects.create(user=user_obj, phoneno=phoneno, usertype=usertype, otp=otp)
                 profile_obj.save()
-                # send_otp_code(phoneno, otp)
+                send_otp_code(phoneno, otp)
                 request.session['phoneno'] = phoneno
                 return redirect(reverse('realestate:otp',kwargs={'phoneno':phoneno}))
         except Exception as e:
@@ -71,9 +71,19 @@ def otp(request, phoneno):
         else:
             messages.error(request,'Please enter valid OTP.')
             
-
     context = {'phoneno': phoneno}
     return render(request,'otp.html', context) 
+
+def resendotp(request):
+    phoneno = request.session['phoneno']
+    print(phoneno)
+    data = Profile.objects.get(phoneno=phoneno)
+    otp = str(random.randrange(1000,9999))
+    data.otp = otp
+    data.save()
+    print(otp)
+    send_otp_code(phoneno, otp)
+    return redirect(reverse('realestate:otp',kwargs={'phoneno':phoneno}))
 
 def otpsuccess(request):
     return render(request,'otpsuccess.html')

@@ -40,13 +40,16 @@ from .models import *
 
 from twilio.rest import Client
 
+
 def send_otp_code(phone_number, otp_code):
     # Your Twilio Account SID and Auth Token
-    account_sid = 'settings.ACCOUNT_SID'
-    auth_token = 'settings.AUTH_TOKEN'
+    account_sid = settings.ACCOUNT_SID
+    auth_token = settings.AUTH_TOKEN
 
     # Your Twilio phone number
-    from_phone_number = 'settings.PHONE_NUMBER'
+    from_phone_number = settings.PHONE_NUMBER
+
+    print(account_sid)
 
     client = Client(account_sid, auth_token)
     message = client.messages.create(

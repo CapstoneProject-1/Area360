@@ -65,7 +65,9 @@
         />
       </div>
     </div>
-
+    <div id="resendotp" class="mb-3">
+      <a href="{% url 'realestate:resendotp' %}" class="color-primary">Resend OTP</a>
+    </div>
     {% csrf_token %}
     <!-- Submit button -->
     <button type="submit" class="btn btn-primary btn-block mb-4">Verify</button>
@@ -86,5 +88,14 @@
       ele[val - 2].focus();
     }
   };
+
+  let rd = document.getElementById("resendotp")
+  rd.style.display = "none";
+
+  setTimeout(() => {
+    const rd = document.getElementById("resendotp");
+    rd.style.display = "block";
+  }, 20000);
+
 </script>
 {% endblock body %}
