@@ -1,9 +1,4 @@
-{% extends "main.html" %}
-
-{% block title %}
-otp | Area360
-{% endblock title %}
-
+{% extends "main.html" %} {% block title %} otp | Area360 {% endblock title %}
 {% block body %}
 <!-- <div class="container-sm my-5 w-50 btn-outline-light p-4">
     <h2 class="h2-responsive text-center mb-5">Register</h2>
@@ -16,46 +11,80 @@ otp | Area360
     </form>
 </div> -->
 <div class="container-sm my-5 w-25 btn-outline-light p-4">
-    <h5 class="h5-responsive text-center mb-3">Please enter OTP to verify your account</h5>
-    <p class="text-center mb-3">A code has been sent to {{phoneno}}</p>
-    <form action="" class="mt-5">
-        <div class="row mb-4">
-            <div class="col">
-                <input class="form-control otp text-center" type="text" oninput='digitValidate(this)' onkeyup='tabChange(1)'
-                    maxlength=1>
-            </div>
-            <div class="col">
-                <input class="form-control otp text-center" type="text" oninput='digitValidate(this)' onkeyup='tabChange(2)'
-                    maxlength=1>
-            </div>
-            <div class="col">
-                <input class="form-control otp text-center" type="text" oninput='digitValidate(this)' onkeyup='tabChange(3)'
-                    maxlength=1>
-            </div>
-            <div class="col">
-                <input class="form-control otp text-center" type="text" oninput='digitValidate(this)' onkeyup='tabChange(4)'
-                    maxlength=1>
-            </div>
-        </div>
+  <h5 class="h5-responsive text-center mb-3">
+    Please enter OTP to verify your account
+  </h5>
+  <p class="text-center mb-3">A code has been sent to {{phoneno}}</p>
+  {% if messages %}
+  <div class="messages">
+    {% for message in messages %} 
+    <p class="text-danger">{{message}}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <form action="" method="post" class="mt-5">
+    <div class="row mb-4">
+      <div class="col">
+        <input
+          class="form-control otp text-center"
+          type="text"
+          name="otp1"
+          oninput="digitValidate(this)"
+          onkeyup="tabChange(1)"
+          maxlength="1"
+        />
+      </div>
+      <div class="col">
+        <input
+          class="form-control otp text-center"
+          type="text"
+          name="otp2"
+          oninput="digitValidate(this)"
+          onkeyup="tabChange(2)"
+          maxlength="1"
+        />
+      </div>
+      <div class="col">
+        <input
+          class="form-control otp text-center"
+          type="text"
+          name="otp3"
+          oninput="digitValidate(this)"
+          onkeyup="tabChange(3)"
+          maxlength="1"
+        />
+      </div>
+      <div class="col">
+        <input
+          class="form-control otp text-center"
+          type="text"
+          name="otp4"
+          oninput="digitValidate(this)"
+          onkeyup="tabChange(4)"
+          maxlength="1"
+        />
+      </div>
+    </div>
 
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary btn-block mb-4">Verify</button>
-    </form>
+    {% csrf_token %}
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4">Verify</button>
+  </form>
 </div>
 
 <script>
-    let digitValidate = function (ele) {
-        console.log(ele.value);
-        ele.value = ele.value.replace(/[^0-9]/g, '');
-    }
+  let digitValidate = function (ele) {
+    console.log(ele.value);
+    ele.value = ele.value.replace(/[^0-9]/g, "");
+  };
 
-    let tabChange = function (val) {
-        let ele = document.querySelectorAll('input');
-        if (ele[val - 1].value != '') {
-            ele[val].focus()
-        } else if (ele[val - 1].value == '') {
-            ele[val - 2].focus()
-        }
+  let tabChange = function (val) {
+    let ele = document.querySelectorAll("input");
+    if (ele[val - 1].value != "") {
+      ele[val].focus();
+    } else if (ele[val - 1].value == "") {
+      ele[val - 2].focus();
     }
+  };
 </script>
 {% endblock body %}

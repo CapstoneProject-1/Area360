@@ -1,0 +1,12 @@
+{% extends "main.html" %} 
+{% block title %} 
+Success | Area360 
+{% endblock title %} 
+{% block body %}
+<div class="container-sm my-5 w-25 btn-outline-light p-4 text-center py-5">
+  <h5 class="h5-responsive text-center mb-3">
+    Your account is successfully verified.
+  </h5>
+  <a class="btn btn-primary mt-5" href="{% url 'realestate:index' %}">Go to Dashboard</a>
+</div>
+{% endblock body %}

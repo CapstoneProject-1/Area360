@@ -5,6 +5,7 @@ app_name = 'realestate'
 
 urlpatterns = [
     path('',views.index, name="index"),
+    path('otp-success/',views.otpsuccess, name="otpsuccess"),
     path('auth/register/',views.register, name="register"),
     path('auth/login/',views.login, name="login"),
     path('auth/register/otp/<phoneno>/',views.otp, name="otp"),
