@@ -17,22 +17,11 @@ Register | Area360
     {% endif %}
     <form action="#" method="post" class="text-center">
         {% csrf_token %}
-        <!-- 2 column grid layout with text inputs for the first and last names -->
-        <div class="row mb-4">
-            <div class="col">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="fname" placeholder="First name"
-                        aria-label="First name" required />
-                </div>
-            </div>
-            <div class="col">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="lname" placeholder="Last name" aria-label="Last name"
-                        required />
-                </div>
-            </div>
+        <!-- username input -->
+        <div class="input-group mb-4">
+            <input type="username" class="form-control" name="username" placeholder="Username" aria-label="Username"
+                required />
         </div>
-
         <!-- Email input -->
         <div class="input-group mb-4">
             <input type="email" class="form-control" name="emailid" placeholder="Email id" aria-label="Email id"

@@ -8,7 +8,6 @@ from django.core.mail import send_mail
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import random
-import http.client
 
 
 # Create your views here.
@@ -17,14 +16,13 @@ def index(request):
 
 def register(request):
     if request.method == 'POST':
-        fname = request.POST.get('fname')
-        lname = request.POST.get('lname')
+        username = request.POST.get('username')
         emailid = request.POST.get('emailid')
         password = request.POST.get('password')
         phoneno = request.POST.get('phoneno')
         usertype = request.POST.get('usertype')
-        list1 = [fname,lname,emailid,password,phoneno,usertype]
-        print(list1)
+        list1 = [username,emailid,password,phoneno,usertype]
+        # print(list1)
 
         try:
             if len(password) < 6:
@@ -34,20 +32,28 @@ def register(request):
                 messages.error(request,'Contact no is wrong.')
 
             else:
+                if User.objects.filter(username = username).first():
+                    messages.error(request,'Username is taken.')
+                    return redirect('realestate:auth/register/')
                 if User.objects.filter(email = emailid).first():
                     messages.error(request,'Email id is taken.')
                     return redirect('realestate:auth/register/')
                 if Profile.objects.filter(phoneno = phoneno).first():
                     messages.error(request,'Contact no is taken.')
                     return redirect('realestate:auth/register/')
-                user_obj = User(first_name=fname, last_name=lname, username=fname+lname ,email=emailid)
+                
+                user_obj = User(username=username ,email=emailid)
                 user_obj.set_password(password)
                 user_obj.save()
                 otp = str(random.randrange(1000,9999))
                 profile_obj = Profile.objects.create(user=user_obj, phoneno=phoneno, usertype=usertype, otp=otp)
                 profile_obj.save()
-                send_otp_code(phoneno, otp)
-                request.session['phoneno'] = phoneno
+                if profile_obj.is_verified:
+                    messages.error(request,'Contact no already verified.')
+                    return redirect('realestate:auth/register/')
+                else:
+                    # send_otp_code(phoneno, otp)
+                    request.session['phoneno'] = phoneno
                 return redirect(reverse('realestate:otp',kwargs={'phoneno':phoneno}))
         except Exception as e:
             print(e)
@@ -61,7 +67,6 @@ def otp(request, phoneno):
         otp4 = request.POST.get('otp4')
         otp = str(otp1+otp2+otp3+otp4)
         print(otp)
-        # verifyotp(phoneno,otp)
         data = Profile.objects.get(phoneno=phoneno)
         if otp == data.otp:
             data.is_verified = True
@@ -81,15 +86,46 @@ def resendotp(request):
     otp = str(random.randrange(1000,9999))
     data.otp = otp
     data.save()
-    print(otp)
+    # print(otp)
     send_otp_code(phoneno, otp)
     return redirect(reverse('realestate:otp',kwargs={'phoneno':phoneno}))
 
 def otpsuccess(request):
     return render(request,'otpsuccess.html')
 
-def login(request):
+def signin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user_obj = User.objects.filter(username = username).first()
+
+        if user_obj is None:
+            messages.error(request, 'User not found')
+            return redirect('/auth/login')
+        
+        profile_obj = Profile.objects.filter(user=user_obj).first()
+
+        if not profile_obj.is_verified:
+            messages.error(request, 'User is not verified pls verify your contact no')
+            return redirect('/auth/login')
+
+        user = authenticate(username= username, password = password)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Login successfully')
+            return redirect('/')
+        else:
+            messages.error(request, 'Wrong password or email')
+            return redirect('/auth/login')
+
     return render(request,'login.html')
+
+def user_logout(request):
+    logout(request)
+    messages.success(request, 'logged out')
+    return redirect('/')
 
 def contact(request):
     return render(request,'contact.html')
@@ -108,3 +144,6 @@ def marketplace(request):
 
 def property(request):
     return render(request,'singleproperty.html')
+
+def sellerdashboard(request):
+    return render(request,'sellerdashboard.html')

@@ -49,7 +49,7 @@ def send_otp_code(phone_number, otp_code):
     # Your Twilio phone number
     from_phone_number = settings.PHONE_NUMBER
 
-    print(account_sid)
+    # print(account_sid)
 
     client = Client(account_sid, auth_token)
     message = client.messages.create(
@@ -57,7 +57,7 @@ def send_otp_code(phone_number, otp_code):
         from_=from_phone_number,
         body=f'Your OTP code is: {otp_code}'
     )
-    print(message.sid)
+    # print(message.sid)
 
 
 # def verifyotp(mobile,otp):
