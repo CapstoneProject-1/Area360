@@ -17,7 +17,7 @@
   <p class="text-center mb-3">A code has been sent to {{phoneno}}</p>
   {% if messages %}
   <div class="messages">
-    {% for message in messages %} 
+    {% for message in messages %}
     <p class="text-danger">{{message}}</p>
     {% endfor %}
   </div>
@@ -25,44 +25,20 @@
   <form action="" method="post" class="mt-5">
     <div class="row mb-4">
       <div class="col">
-        <input
-          class="form-control otp text-center"
-          type="text"
-          name="otp1"
-          oninput="digitValidate(this)"
-          onkeyup="tabChange(1)"
-          maxlength="1"
-        />
+        <input class="form-control otp text-center" type="text" name="otp1" oninput="digitValidate(this)"
+          onkeyup="tabChange(1)" maxlength="1" />
       </div>
       <div class="col">
-        <input
-          class="form-control otp text-center"
-          type="text"
-          name="otp2"
-          oninput="digitValidate(this)"
-          onkeyup="tabChange(2)"
-          maxlength="1"
-        />
+        <input class="form-control otp text-center" type="text" name="otp2" oninput="digitValidate(this)"
+          onkeyup="tabChange(2)" maxlength="1" />
       </div>
       <div class="col">
-        <input
-          class="form-control otp text-center"
-          type="text"
-          name="otp3"
-          oninput="digitValidate(this)"
-          onkeyup="tabChange(3)"
-          maxlength="1"
-        />
+        <input class="form-control otp text-center" type="text" name="otp3" oninput="digitValidate(this)"
+          onkeyup="tabChange(3)" maxlength="1" />
       </div>
       <div class="col">
-        <input
-          class="form-control otp text-center"
-          type="text"
-          name="otp4"
-          oninput="digitValidate(this)"
-          onkeyup="tabChange(4)"
-          maxlength="1"
-        />
+        <input class="form-control otp text-center" type="text" name="otp4" oninput="digitValidate(this)"
+          onkeyup="tabChange(4)" maxlength="1" />
       </div>
     </div>
     <div id="resendotp" class="mb-3">
@@ -93,7 +69,6 @@
   rd.style.display = "none";
 
   setTimeout(() => {
-    const rd = document.getElementById("resendotp");
     rd.style.display = "block";
   }, 60000);
 

@@ -6,8 +6,19 @@ from .models import *
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 import random
+from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import user_passes_test
+
+
+
+# group_required decorator
+def group_required(*group_names):
+    def in_group(u):
+        return (u.is_superuser or bool(u.groups.filter(name__in=group_names)))
+    return user_passes_test(in_group)
+
 
 
 # Create your views here.
@@ -22,7 +33,7 @@ def register(request):
         phoneno = request.POST.get('phoneno')
         usertype = request.POST.get('usertype')
         list1 = [username,emailid,password,phoneno,usertype]
-        # print(list1)
+        print(list1)
 
         try:
             if len(password) < 6:
@@ -54,6 +65,8 @@ def register(request):
                 else:
                     # send_otp_code(phoneno, otp)
                     request.session['phoneno'] = phoneno
+                    group = Group.objects.get(name=usertype)
+                    user_obj.groups.add(group)
                 return redirect(reverse('realestate:otp',kwargs={'phoneno':phoneno}))
         except Exception as e:
             print(e)
@@ -87,7 +100,7 @@ def resendotp(request):
     data.otp = otp
     data.save()
     # print(otp)
-    send_otp_code(phoneno, otp)
+    #send_otp_code(phoneno, otp)
     return redirect(reverse('realestate:otp',kwargs={'phoneno':phoneno}))
 
 def otpsuccess(request):
@@ -145,5 +158,7 @@ def marketplace(request):
 def property(request):
     return render(request,'singleproperty.html')
 
+@login_required
+@group_required('Seller')
 def sellerdashboard(request):
     return render(request,'sellerdashboard.html')
