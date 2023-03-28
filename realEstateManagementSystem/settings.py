@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'marketplace'
+    'marketplace',
+    'dashboard',
+    'multiupload',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'realEstateManagementSystem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR,'/templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,6 +140,7 @@ STATIC_FILES_DIRS = [
 # media
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
 
 
 # Default primary key field type

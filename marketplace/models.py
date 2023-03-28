@@ -25,10 +25,7 @@ class Profile(models.Model):
 
     def __str__ (self):
         return self.user.username
-
-# class Property(models.Model):
     
-
 
 # from django.db import models
  

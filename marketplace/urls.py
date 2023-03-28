@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
@@ -12,7 +14,6 @@ urlpatterns = [
     path('auth/register/resendotp/',views.resendotp, name="resendotp"),
     path('auth/logout/',views.user_logout, name = 'logout'),
     
-    path('seller/',views.sellerdashboard, name="seller"),
     path('marketplace/',views.marketplace, name="marketplace"),
     path('property/',views.property, name="property"),
     
@@ -20,4 +21,5 @@ urlpatterns = [
     path('about/',views.about, name="about"),
     path('terms&conditions/',views.tc, name="tc"),
     path('privacypolicy/',views.privacypolicy, name="privacypolicy"),
+    
 ]

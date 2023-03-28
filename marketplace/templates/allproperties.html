@@ -1,0 +1,14 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Dashboard | seller
+{% endblock title %}
+
+{% block body %}
+
+{% include "dashboardComponents/dashboardmenu.html" %}
+<main>
+    {% include "dashboardComponents/propertylist.html" %}
+</main>
+{% endblock body %}

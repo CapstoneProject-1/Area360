@@ -1,29 +1,21 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+import requests
+from dashboard.models import *
 from marketplace.otp import *
 from .models import *
-from django.conf import settings
-from django.core.mail import send_mail
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required, permission_required
 import random
 from django.contrib.auth.models import Group
-from django.contrib.auth.decorators import user_passes_test
-
-
-
-# group_required decorator
-def group_required(*group_names):
-    def in_group(u):
-        return (u.is_superuser or bool(u.groups.filter(name__in=group_names)))
-    return user_passes_test(in_group)
 
 
 
 # Create your views here.
 def index(request):
-    return render(request,'index.html')
+    properties = Property_image.objects.all()[0:20]
+    context = {"properties":properties}
+    return render(request,'index.html',context)
 
 def register(request):
     if request.method == 'POST':
@@ -32,8 +24,8 @@ def register(request):
         password = request.POST.get('password')
         phoneno = request.POST.get('phoneno')
         usertype = request.POST.get('usertype')
-        list1 = [username,emailid,password,phoneno,usertype]
-        print(list1)
+        # list1 = [username,emailid,password,phoneno,usertype]
+        # print(list1)
 
         try:
             if len(password) < 6:
@@ -63,7 +55,7 @@ def register(request):
                     messages.error(request,'Contact no already verified.')
                     return redirect('realestate:auth/register/')
                 else:
-                    # send_otp_code(phoneno, otp)
+                    send_otp_code(phoneno, otp)
                     request.session['phoneno'] = phoneno
                     group = Group.objects.get(name=usertype)
                     user_obj.groups.add(group)
@@ -100,7 +92,7 @@ def resendotp(request):
     data.otp = otp
     data.save()
     # print(otp)
-    #send_otp_code(phoneno, otp)
+    send_otp_code(phoneno, otp)
     return redirect(reverse('realestate:otp',kwargs={'phoneno':phoneno}))
 
 def otpsuccess(request):
@@ -153,12 +145,20 @@ def privacypolicy(request):
     return render(request,'privacypolicy.html')
 
 def marketplace(request):
-    return render(request,'marketplace.html')
+    states_url = "https://api.countrystatecity.in/v1/countries/IN/states"
+    cities_url = "https://api.countrystatecity.in/v1/countries/IN/cities"
+    headers = {
+        'X-CSCAPI-KEY': 'blhwU1g0VUZ4Wm1lck8zeTg5WjZIN1dvZ0JHR09NUmJrcjlTYzVRZw=='
+    }
+    states = requests.request("GET", states_url, headers=headers).json()
+    cities = requests.request("GET", cities_url, headers=headers).json()
+    property_type = Property_type.objects.all()
+    properties = Property.objects.all()
+    context = {"properties":properties, "property_type":property_type, "cities":cities, "states":states}
+    return render(request,'marketplace.html',context)
 
 def property(request):
-    return render(request,'singleproperty.html')
+    properties = get_object_or_404(Property)
+    context = {"properties":properties}
+    return render(request,'singleproperty.html',context)
 
-@login_required
-@group_required('Seller')
-def sellerdashboard(request):
-    return render(request,'sellerdashboard.html')

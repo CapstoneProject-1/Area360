@@ -1,0 +1,26 @@
+<div class="container p-3">
+    <div class="container mt-5">
+          <h2 class="h2-responsive text-center mb-0" id="home">Properties</h2>
+    </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4 mt-3">
+      {% for i in properties %}
+          <a href="{% url 'realestate:property'%}" class="text-normal text-body">
+                <div class="col">
+                      <div class="card h-100">
+                            <img src=""
+                                  class="card-img-top" alt="Skyscrapers" />
+                            <div class="card-body">
+                                  <!-- <h5 class="card-title">Card title</h5> -->
+                                  <span class="badge badge-primary">{{ i.property.property_purpose }}</span>
+                                  <span class="badge badge-secondary">{{ i.property.property_type }}</span>
+                                  <p class="card-text mt-2 fw-bold">
+                                    ₹{{ i.property.dynamic_fields.property_monthly_rent }}{{ i.property.dynamic_fields.property_price }} | {{ i.property.dynamic_fields.property_area }} sq-ft.
+                                  </p>
+                                  <p class="m-0">{{i.property_city}}, {{i.property_state}}</p>
+                            </div>
+                      </div>
+                </div>
+          </a>
+          {% endfor %}
+    </div>
+</div>

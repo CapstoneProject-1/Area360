@@ -15,13 +15,11 @@ Marketplace | Area360
                   <div class="col">
                         <label for="">Property type</label>
                         <div class="md-form">
-                              <select name="options" id="select" class="browser-default md-select form-control">
+                              <select class="select form-control" name="property_type">
                                     <option value="" disabled selected>Choose property type</option>
-                                    <option value="1">Apartment</option>
-                                    <option value="2">Farm house</option>
-                                    <option value="3">Flate</option>
-                                    <option value="4">Warehouse</option>
-                                    <option value="5">Plot</option>
+                                    {% for i in property_type %}
+                                    <option value="{{i.property_type}}">{{i.property_type}}</option>
+                                    {% endfor %}
                               </select>
                         </div>
                   </div>
@@ -35,28 +33,14 @@ Marketplace | Area360
                               </select>
                         </div>
                   </div>
-                  <!-- <div class="col">
-                <label for="">Country</label>
-                <div class="md-form">
-                    <select name="options" id="select" class="browser-default md-select form-control">
-                        <option value="" disabled selected>Choose your country</option>
-                        <option value="1">India</option>
-                        <option value="2">USA</option>
-                        <option value="3">Option 3</option>
-                        <option value="4">Option 4</option>
-                        <option value="5">Option 5</option>
-                    </select>
-                </div>
-            </div> -->
                   <div class="col">
                         <label for="">State</label>
                         <div class="md-form">
                               <select name="options" id="select" class="browser-default md-select form-control">
-                                    <option value="" disabled selected>Choose your state</option>
-                                    <option value="1">Gujarat</option>
-                                    <option value="2">MP</option>
-                                    <option value="3">UP</option>
-                                    <option value="4">Panjab</option>
+                                    <option value="" disabled selected>State</option>
+                                    {% for i in states%}
+                                    <option value="{{i.name}}">{{i.name}}</option>
+                                    {% endfor %}
                               </select>
                         </div>
                   </div>
@@ -64,12 +48,10 @@ Marketplace | Area360
                         <label for="">City</label>
                         <div class="md-form">
                               <select name="options" id="select" class="browser-default md-select form-control">
-                                    <option value="" disabled selected>Choose your city</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
-                                    <option value="4">Option 4</option>
-                                    <option value="5">Option 5</option>
+                                    <option value="" disabled selected>City</option>
+                                    {% for i in cities %}
+                                    <option value="{{i.name}}">{{i.name}}</option>
+                                    {% endfor %}
                               </select>
                         </div>
                   </div>
@@ -78,146 +60,7 @@ Marketplace | Area360
       </form>
 </div>
 
-<div class="container p-3">
-      <div class="row row-cols-1 row-cols-md-4 g-4 mt-3">
-            <a href="#" class="text-normal text-body">
-                  <div class="col">
-                        <div class="card h-100">
-                              <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    class="card-img-top" alt="Skyscrapers" />
-                              <div class="card-body">
-                                    <!-- <h5 class="card-title">Card title</h5> -->
-                                    <span class="badge badge-primary">Sell</span>
-                                    <span class="badge badge-secondary">Apartment</span>
-                                    <p class="card-text mt-2 fw-bold">
-                                          $10000 | 500 sqft
-                                    </p>
-                                    <p class="m-0">City, state</p>
-                              </div>
-                        </div>
-                  </div>
-            </a>
-            <a href="#" class="text-normal text-body">
-                  <div class="col">
-                        <div class="card h-100">
-                              <img src="https://images.pexels.com/photos/2564873/pexels-photo-2564873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750     &dpr=1"
-                                    class="card-img-top" alt="Skyscrapers" />
-                              <div class="card-body">
-                                    <!-- <h5 class="card-title">Card title</h5> -->
-                                    <span class="badge badge-primary">Sell</span>
-                                    <span class="badge badge-secondary">Apartment</span>
-                                    <p class="card-text mt-2 fw-bold">
-                                          $10000 | 500 sqft
-                                    </p>
-                                    <p class="m-0">City, state</p>
-                              </div>
-                        </div>
-                  </div>
-            </a>
-            <a href="#" class="text-normal text-body">
-                  <div class="col">
-                        <div class="card h-100">
-                              <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    class="card-img-top" alt="Skyscrapers" />
-                              <div class="card-body">
-                                    <!-- <h5 class="card-title">Card title</h5> -->
-                                    <span class="badge badge-primary">Sell</span>
-                                    <span class="badge badge-secondary">Apartment</span>
-                                    <p class="card-text mt-2 fw-bold">
-                                          $10000 | 500 sqft
-                                    </p>
-                                    <p class="m-0">City, state</p>
-                              </div>
-                        </div>
-                  </div>
-            </a>
-            <a href="#" class="text-normal text-body">
-                  <div class="col">
-                        <div class="card h-100">
-                              <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    class="card-img-top" alt="Skyscrapers" />
-                              <div class="card-body">
-                                    <!-- <h5 class="card-title">Card title</h5> -->
-                                    <span class="badge badge-primary">Sell</span>
-                                    <span class="badge badge-secondary">Apartment</span>
-                                    <p class="card-text mt-2 fw-bold">
-                                          $10000 | 500 sqft
-                                    </p>
-                                    <p class="m-0">City, state</p>
-                              </div>
-                        </div>
-                  </div>
-            </a>
-            <a href="#" class="text-normal text-body">
-                  <div class="col">
-                        <div class="card h-100">
-                              <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    class="card-img-top" alt="Skyscrapers" />
-                              <div class="card-body">
-                                    <!-- <h5 class="card-title">Card title</h5> -->
-                                    <span class="badge badge-primary">Sell</span>
-                                    <span class="badge badge-secondary">Apartment</span>
-                                    <p class="card-text mt-2 fw-bold">
-                                          $10000 | 500 sqft
-                                    </p>
-                                    <p class="m-0">City, state</p>
-                              </div>
-                        </div>
-                  </div>
-            </a>
-            <a href="#" class="text-normal text-body">
-                  <div class="col">
-                        <div class="card h-100">
-                              <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    class="card-img-top" alt="Skyscrapers" />
-                              <div class="card-body">
-                                    <!-- <h5 class="card-title">Card title</h5> -->
-                                    <span class="badge badge-primary">Sell</span>
-                                    <span class="badge badge-secondary">Apartment</span>
-                                    <p class="card-text mt-2 fw-bold">
-                                          $10000 | 500 sqft
-                                    </p>
-                                    <p class="m-0">City, state</p>
-                              </div>
-                        </div>
-                  </div>
-            </a>
-            <a href="#" class="text-normal text-body">
-                  <div class="col">
-                        <div class="card h-100">
-                              <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    class="card-img-top" alt="Skyscrapers" />
-                              <div class="card-body">
-                                    <!-- <h5 class="card-title">Card title</h5> -->
-                                    <span class="badge badge-primary">Sell</span>
-                                    <span class="badge badge-secondary">Apartment</span>
-                                    <p class="card-text mt-2 fw-bold">
-                                          $10000 | 500 sqft
-                                    </p>
-                                    <p class="m-0">City, state</p>
-                              </div>
-                        </div>
-                  </div>
-            </a>
-            <a href="#" class="text-normal text-body">
-                  <div class="col">
-                        <div class="card h-100">
-                              <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    class="card-img-top" alt="Skyscrapers" />
-                              <div class="card-body">
-                                    <!-- <h5 class="card-title">Card title</h5> -->
-                                    <span class="badge badge-primary">Sell</span>
-                                    <span class="badge badge-secondary">Apartment</span>
-                                    <p class="card-text mt-2 fw-bold">
-                                          $10000 | 500 sqft
-                                    </p>
-                                    <p class="m-0">City, state</p>
-                              </div>
-                        </div>
-                  </div>
-            </a>
-      </div>
-</div>
+{% include 'dashboardComponents/propertylist.html' %}
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 {% endblock body %}

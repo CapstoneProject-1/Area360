@@ -1,0 +1,67 @@
+from django.db import models
+from django.contrib.auth.models import User
+
+
+# Create your models here.
+
+class Property_type(models.Model):
+     property_type = models.CharField(max_length=30)
+
+     def __str__(self):
+          return self.property_type
+
+
+class Property(models.Model):
+     type = (
+         ('Rent', 'Rent'),
+         ('Sell', 'Sell'),
+     )
+     posting_as_a = (
+          ('Full House', 'Full House'),
+          ('On sharing basis', 'On sharing basis'),
+     )
+     age_of_construction = (
+          ('less than 5 years', 'less than 5 years'),
+          ('5 to 10 years', '5 to 10 years'),
+          ('10 to 20 years', '10 to 20 years'),
+          ('More than 20', 'More than 20'),
+     )
+     furnished = (
+          ('Full Furnished', 'Full Furnished'),
+          ('No Furnished', 'No Furnished'),
+     )
+     user_seller = models.ForeignKey(User, on_delete=models.CASCADE)
+     property_purpose = models.CharField(max_length=10, choices=type)
+     property_type = models.CharField(max_length=50)
+     property_posting = models.CharField(
+         max_length=30, choices=posting_as_a, default="On sharing basis", null=True, blank=True)
+     property_state = models.CharField(max_length=100)
+     property_city = models.CharField(max_length=100)
+     # property_floor_no = models.IntegerField(null=True, blank=True)
+     # property_area = models.IntegerField(null=True, blank=True)
+     property_age_of_construction = models.CharField(
+         max_length=100, choices=age_of_construction, null=True, blank=True)
+     # property_floors_allowed_for_construction = models.IntegerField(blank=True)
+     # property_no_of_open_sides = models.IntegerField(null=True, blank=True)
+     property_bountry_wall = models.CharField(
+         max_length=20, null=True, blank=True)
+     property_furnished_status = models.CharField(
+         max_length=50, choices=furnished, null=True, blank=True)
+     # property_monthly_rent = models.IntegerField(null=True, blank=True)
+     # property_maintenance_charges = models.IntegerField(null=True, blank=True)
+     # property_price = models.IntegerField(null=True, blank=True)
+     # property_booking_price = models.IntegerField(null=True, blank=True)
+     dynamic_fields = models.JSONField(default=None)
+
+     def __str__(self):
+          return self.property_type
+
+class Property_image(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    image1 = models.ImageField(upload_to="images/")
+    image2 = models.ImageField(upload_to="images/", default="")
+    image3 = models.ImageField(upload_to="images/", default="")
+    image4 = models.ImageField(upload_to="images/", default="")
+    image5 = models.ImageField(upload_to="images/", default="")
+
+
