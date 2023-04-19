@@ -8,35 +8,43 @@
                 {% for i in groups %}
                 {% if i.name == "Seller" %}
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                    <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>{{ i.name }} Dashboard</span>
+                    <span>{{ i.name }} Dashboard</span>
                 </a>
                 {% elif i.name == "Builder" %}
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                    <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>{{ i.name }} Dashboard</span>
+                    <span>{{ i.name }} Dashboard</span>
                 </a>
                 {% endif %}
                 
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                <!-- <a href="#" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-chart-line fa-fw me-3"></i><span>Analytics</span>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple">
                     <i class="fas fa-chart-bar fa-fw me-3"></i><span>Bookings</span>
-                </a>
+                </a> -->
                 {% if i.name == "Seller" %}
                 <a href="{% url 'addproperty' %}" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-money-bill fa-fw me-3"></i><span>Add Property</span>
+                    <span>Add Property</span>
                 </a>
                 
                 <a href="{% url 'allproperties' %}" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-money-bill fa-fw me-3"></i><span>All Properties</span>
+                    <span>All Properties</span>
+                </a>
+
+                <a href="{% url 'allproperties' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <span>Verified Properties</span>
                 </a>
                 {% elif i.name == "Builder" %}
                 <a href="{% url 'addproperty' %}" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-money-bill fa-fw me-3"></i><span>Add Projects</span>
+                    <span>Add Projects</span>
                 </a>
                 
                 <a href="{% url 'addproperty' %}" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-money-bill fa-fw me-3"></i><span>All Projects</span>
+                    <span>All Projects</span>
+                </a>
+
+                <a href="{% url 'addproperty' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <span>Verified Projects</span>
                 </a>
                 {% endif %}
                 {% endfor %}

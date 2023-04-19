@@ -15,7 +15,7 @@ Marketplace | Area360
                   <div class="col">
                         <label for="">Property type</label>
                         <div class="md-form">
-                              <select class="select form-control" name="property_type">
+                              <select class="select form-control" name="propertytype">
                                     <option value="" disabled selected>Choose property type</option>
                                     {% for i in property_type %}
                                     <option value="{{i.property_type}}">{{i.property_type}}</option>
@@ -26,17 +26,17 @@ Marketplace | Area360
                   <div class="col">
                         <label for="">Purpose</label>
                         <div class="md-form">
-                              <select name="options" id="select" class="browser-default md-select form-control">
+                              <select class="browser-default md-select form-control" name="purpose">
                                     <option value="" disabled selected>Buy or rent</option>
-                                    <option value="1">Buy</option>
-                                    <option value="2">Rent</option>
+                                    <option value="Sell">Buy</option>
+                                    <option value="Rent">Rent</option>
                               </select>
                         </div>
                   </div>
                   <div class="col">
                         <label for="">State</label>
                         <div class="md-form">
-                              <select name="options" id="select" class="browser-default md-select form-control">
+                              <select class="browser-default md-select form-control" name="state">
                                     <option value="" disabled selected>State</option>
                                     {% for i in states%}
                                     <option value="{{i.name}}">{{i.name}}</option>
@@ -47,7 +47,7 @@ Marketplace | Area360
                   <div class="col">
                         <label for="">City</label>
                         <div class="md-form">
-                              <select name="options" id="select" class="browser-default md-select form-control">
+                              <select class="browser-default md-select form-control" name="city">
                                     <option value="" disabled selected>City</option>
                                     {% for i in cities %}
                                     <option value="{{i.name}}">{{i.name}}</option>

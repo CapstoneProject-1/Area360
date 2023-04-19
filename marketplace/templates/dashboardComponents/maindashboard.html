@@ -1,0 +1,39 @@
+{% extends "dashboardComponents/dashboard.html" %}
+{% load static %}
+
+{% block title %}
+Dashboard | seller
+{% endblock title %}
+
+{% block body %}
+
+{% include "dashboardComponents/dashboardmenu.html" %}
+<main>
+    <div class="container-fluid">
+        <div class="py-5 mb-5">
+            <div class="row row-cols-1 row-cols-md-2 g-2">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title fw-bold text-primary">Properties listed</h4>
+                            <h5 class="card-text mt-4">
+                                {{total_properties}}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h4 class="card-title fw-bold text-primary">Properties verified</h4>
+                            <h5 class="card-text mt-4">
+                                {{verified_properties}}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock body %}

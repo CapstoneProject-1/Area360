@@ -4,12 +4,11 @@ from django.contrib.auth.decorators import user_passes_test
 import requests
 from django.contrib.auth.models import Group
 from django.contrib import messages
+from django.utils.crypto import get_random_string
 
 from .models import *
 
 # group_required decorator
-
-
 def group_required(*group_names):
     def in_group(u):
         return (u.is_superuser or bool(u.groups.filter(name__in=group_names)))
@@ -20,22 +19,18 @@ def group(request):
     groups = request.user.groups.all()
     return groups
 
+
+
 # Create your views here.
-
-
 @login_required
 @group_required('Seller', 'Builder')
 def dashboard(request):
-    total_properties = Property.objects.filter(
-        user_seller=request.user).count()
+    profile = Profile.objects.get(user = request.user)
+    total_properties = Property.objects.filter(user_seller = profile).count()
+    verified_properties = Property.objects.filter(user_seller = profile, is_verified = True).count()
     groups = group(request)
-    context = {"groups": groups, "total_properties": total_properties}
-    return render(request, 'maindashboard.html', context)
-
-
-def propertydashboard(request):
-    return render(request, 'propertydashboard.html')
-
+    context = {"groups": groups, "total_properties": total_properties, "verified_properties": verified_properties}
+    return render(request, 'dashboardComponents/maindashboard.html', context)
 
 def addproperty(request):
     states_url = "https://api.countrystatecity.in/v1/countries/IN/states"
@@ -73,10 +68,10 @@ def addproperty(request):
         booking_price = request.POST.get('bprice')
        
         
-        user_seller = request.user
-
-        print(total_floors)
-        property_obj = Property(user_seller=user_seller,
+        user = Profile.objects.get(user = request.user)
+       
+        property_obj = Property(
+                                user_seller=user,
                                 property_purpose=property_purpose,
                                 property_type=property_type,
                                 property_posting=posting,
@@ -104,8 +99,9 @@ def addproperty(request):
                                                 "property_price": price,
                                                 "property_booking_price": booking_price
                                                 },
-                                
                                 )
+        
+
         property_obj.save()
 
         property_image1 = request.FILES['image1']
@@ -113,6 +109,7 @@ def addproperty(request):
         property_image3 = request.FILES['image3']
         property_image4 = request.FILES['image4']
         property_image5 = request.FILES['image5']
+        slug = get_random_string(8,"0123456789n")
 
         image_obj = Property_image.objects.create(property=property_obj,
                                                    image1=property_image1,
@@ -120,6 +117,7 @@ def addproperty(request):
                                                    image3=property_image3,
                                                    image4=property_image4,
                                                    image5=property_image5,
+                                                   slug = slug
                                                   )
         image_obj.save()
         # list1 = [property_image1,property_image2,property_image3,property_image4,property_image5]
@@ -129,11 +127,13 @@ def addproperty(request):
         #     image_obj.save()
         messages.success(request, 'Property successfuly added.')
 
-    return render(request, 'addproperty.html', context)
+    return render(request, 'dashboardComponents/addproperty.html', context)
 
 
 def allproperties(request):
-    properties = Property.objects.filter(user_seller=request.user)
+    profile = Profile.objects.get(user = request.user)
+    properties  = Property.objects.filter(user_seller = profile)
     groups = group(request)
     context = {"groups": groups, "properties": properties}
-    return render(request, 'allproperties.html', context)
+    return render(request, 'dashboardComponents/allproperties.html', context)
+

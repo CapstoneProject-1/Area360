@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -151,3 +152,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ACCOUNT_SID = 'AC81c847752bdb95277a90b4055cf12111'
 AUTH_TOKEN = 'acac6df1c11a9d351044769d7ba6cf0b'
 PHONE_NUMBER = '+12673148248'
+
+
+
+# admin panel customization
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Area360",
+    "site_header": "Area360",
+    "site_brand": "Area360",
+    "copyright": "Area360.com",
+}
+
+
+# sending mails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ndminer17@gmail.com'
+EMAIL_HOST_PASSWORD = 'jixgsooqspwxyxec'

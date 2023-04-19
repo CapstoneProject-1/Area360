@@ -8,14 +8,15 @@ from .models import *
 from django.contrib.auth import authenticate, login, logout
 import random
 from django.contrib.auth.models import Group
-
+from django.core.mail import send_mail
 
 
 # Create your views here.
 def index(request):
     properties = Property_image.objects.all()[0:20]
-    context = {"properties":properties}
-    return render(request,'index.html',context)
+    context = {"properties": properties}
+    return render(request, 'index.html', context)
+
 
 def register(request):
     if request.method == 'POST':
@@ -29,40 +30,42 @@ def register(request):
 
         try:
             if len(password) < 6:
-                messages.error(request,'Password is too short.')
-            
+                messages.error(request, 'Password is too short.')
+
             if len(phoneno) < 10:
-                messages.error(request,'Contact no is wrong.')
+                messages.error(request, 'Contact no is wrong.')
 
             else:
-                if User.objects.filter(username = username).first():
-                    messages.error(request,'Username is taken.')
+                if User.objects.filter(username=username).first():
+                    messages.error(request, 'Username is taken.')
                     return redirect('realestate:auth/register/')
-                if User.objects.filter(email = emailid).first():
-                    messages.error(request,'Email id is taken.')
+                if User.objects.filter(email=emailid).first():
+                    messages.error(request, 'Email id is taken.')
                     return redirect('realestate:auth/register/')
-                if Profile.objects.filter(phoneno = phoneno).first():
-                    messages.error(request,'Contact no is taken.')
+                if Profile.objects.filter(phoneno=phoneno).first():
+                    messages.error(request, 'Contact no is taken.')
                     return redirect('realestate:auth/register/')
-                
-                user_obj = User(username=username ,email=emailid)
+
+                user_obj = User(username=username, email=emailid)
                 user_obj.set_password(password)
                 user_obj.save()
-                otp = str(random.randrange(1000,9999))
-                profile_obj = Profile.objects.create(user=user_obj, phoneno=phoneno, usertype=usertype, otp=otp)
+                otp = str(random.randrange(1000, 9999))
+                profile_obj = Profile.objects.create(
+                    user=user_obj, phoneno=phoneno, usertype=usertype, otp=otp)
                 profile_obj.save()
                 if profile_obj.is_verified:
-                    messages.error(request,'Contact no already verified.')
+                    messages.error(request, 'Contact no already verified.')
                     return redirect('realestate:auth/register/')
                 else:
                     send_otp_code(phoneno, otp)
                     request.session['phoneno'] = phoneno
                     group = Group.objects.get(name=usertype)
                     user_obj.groups.add(group)
-                return redirect(reverse('realestate:otp',kwargs={'phoneno':phoneno}))
+                return redirect(reverse('realestate:otp', kwargs={'phoneno': phoneno}))
         except Exception as e:
             print(e)
-    return render(request,'register.html') 
+    return render(request, 'register.html')
+
 
 def otp(request, phoneno):
     if request.method == 'POST':
@@ -76,46 +79,50 @@ def otp(request, phoneno):
         if otp == data.otp:
             data.is_verified = True
             data.save()
-            messages.success(request,'Contact no succssfully verified.')
+            messages.success(request, 'Contact no succssfully verified.')
             return redirect('/otp-success')
         else:
-            messages.error(request,'Please enter valid OTP.')
-            
+            messages.error(request, 'Please enter valid OTP.')
+
     context = {'phoneno': phoneno}
-    return render(request,'otp.html', context) 
+    return render(request, 'otp.html', context)
+
 
 def resendotp(request):
     phoneno = request.session['phoneno']
     print(phoneno)
     data = Profile.objects.get(phoneno=phoneno)
-    otp = str(random.randrange(1000,9999))
+    otp = str(random.randrange(1000, 9999))
     data.otp = otp
     data.save()
     # print(otp)
     send_otp_code(phoneno, otp)
-    return redirect(reverse('realestate:otp',kwargs={'phoneno':phoneno}))
+    return redirect(reverse('realestate:otp', kwargs={'phoneno': phoneno}))
+
 
 def otpsuccess(request):
-    return render(request,'otpsuccess.html')
+    return render(request, 'otpsuccess.html')
+
 
 def signin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user_obj = User.objects.filter(username = username).first()
+        user_obj = User.objects.filter(username=username).first()
 
         if user_obj is None:
             messages.error(request, 'User not found')
             return redirect('/auth/login')
-        
+
         profile_obj = Profile.objects.filter(user=user_obj).first()
 
         if not profile_obj.is_verified:
-            messages.error(request, 'User is not verified pls verify your contact no')
+            messages.error(
+                request, 'User is not verified pls verify your contact no')
             return redirect('/auth/login')
 
-        user = authenticate(username= username, password = password)
+        user = authenticate(username=username, password=password)
 
         if user is not None:
             login(request, user)
@@ -125,24 +132,44 @@ def signin(request):
             messages.error(request, 'Wrong password or email')
             return redirect('/auth/login')
 
-    return render(request,'login.html')
+    return render(request, 'login.html')
+
 
 def user_logout(request):
     logout(request)
     messages.success(request, 'logged out')
     return redirect('/')
 
+
 def contact(request):
-    return render(request,'contact.html')
+    if request.method == 'POST':
+        fn = request.POST.get('firstname')
+        ln = request.POST.get('lastname')
+        subject = request.POST.get('subject')
+        email = request.POST.get('email')
+        msg = request.POST.get('message')
+
+        try:
+            message = fn + ln + email + msg
+            send_mail(subject, message, email, [settings.EMAIL_HOST_USER])
+            messages.success(request, 'successfully send')
+            return redirect('/')
+        except Exception as e:
+            print(e)
+    return render(request, 'contact.html')
+
 
 def about(request):
-    return render(request,'about.html')
+    return render(request, 'about.html')
+
 
 def tc(request):
-    return render(request,'t&c.html')
+    return render(request, 't&c.html')
+
 
 def privacypolicy(request):
-    return render(request,'privacypolicy.html')
+    return render(request, 'privacypolicy.html')
+
 
 def marketplace(request):
     states_url = "https://api.countrystatecity.in/v1/countries/IN/states"
@@ -153,12 +180,42 @@ def marketplace(request):
     states = requests.request("GET", states_url, headers=headers).json()
     cities = requests.request("GET", cities_url, headers=headers).json()
     property_type = Property_type.objects.all()
-    properties = Property.objects.all()
-    context = {"properties":properties, "property_type":property_type, "cities":cities, "states":states}
-    return render(request,'marketplace.html',context)
 
-def property(request):
-    properties = get_object_or_404(Property)
-    context = {"properties":properties}
-    return render(request,'singleproperty.html',context)
+    # searchbar
+    propertytype = ""
+    purpose = ""
+    state = ""
+    city = ""
+    properties = None
+    if request.method == 'POST':
+        propertytype = request.POST.get('propertytype')
+        purpose = request.POST.get('purpose')
+        state = request.POST.get('state')
+        city = request.POST.get('city')
 
+    try:
+        property_obj = Property.objects.get(
+        property_type=propertytype, property_purpose=purpose, property_state=state, property_city=city)
+        properties = Property_image.objects.filter(property=property_obj)
+    except Property.DoesNotExist:
+        properties = Property_image.objects.all()
+    
+    context = {"properties": properties, "property_type": property_type, "cities": cities, "states": states}
+    return render(request, 'marketplace.html', context)
+
+
+def property(request, slug):
+    property1 = Property_image.objects.filter(slug=slug)
+    profile = Profile.objects.filter()
+    context = {"propertydetails": property1, "profile": profile}
+
+    # if request.method == "POST":
+    #     name = request.POST.get('name')
+    #     contactno = request.POST.get('contactno')
+    #     property_obj = Property(property)
+    #     obj = Buyer(property=property_obj, name=name,contactno=contactno)
+    #     print(obj)
+    #     obj.save()
+    #     if request.user == "Buyer":
+    #         messages.success(request, 'Your request send to the seller.')
+    return render(request, 'singleproperty.html', context)
