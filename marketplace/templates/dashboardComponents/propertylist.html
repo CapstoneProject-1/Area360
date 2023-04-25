@@ -5,6 +5,7 @@
       <div class="row row-cols-1 row-cols-md-4 g-4 mt-3">
             {% if properties %}
             {% for i in properties %}
+            {% if i.property.is_verified %}
             <a href="{% url 'realestate:property' slug=i.slug %}" class="text-normal text-body">
                   <div class="col">
                         <div class="card h-100">
@@ -21,6 +22,7 @@
                         </div>
                   </div>
             </a>
+            {% endif %}
             {% endfor %}
             {% else %}
             <h2 class="h2-responsive my-4">No result found.</h2>

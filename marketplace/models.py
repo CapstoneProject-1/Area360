@@ -23,6 +23,7 @@ class Profile(models.Model):
             ("buyer","buyer"),
             ("seller","seller"),
             ("builder","builder"),
+            ("supervisor","supervisor")
         }    
 
     def __str__ (self):

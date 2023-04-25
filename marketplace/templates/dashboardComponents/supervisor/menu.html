@@ -5,42 +5,15 @@
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar bg-white ">
         <div class="position-sticky">
             <div class="list-group list-group-flush mx-2 mt-4">
-                {% for i in groups %}
-                {% if i.name == "Seller" %}
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                    <span>{{ i.name }} Dashboard</span>
+                    <span>Dashboard</span>
                 </a>
-                {% elif i.name == "Builder" %}
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                    <span>{{ i.name }} Dashboard</span>
+                <a href="{% url 'propertyverification' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <span>Properties</span>
                 </a>
-                {% endif %}
-                
-                <!-- <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-chart-line fa-fw me-3"></i><span>Analytics</span>
+                <a href="{% url 'projectverification' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <span>Projects</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-chart-bar fa-fw me-3"></i><span>Bookings</span>
-                </a> -->
-                {% if i.name == "Seller" %}
-                <a href="{% url 'addproperty' %}" class="list-group-item list-group-item-action py-2 ripple">
-                    <span>Add Property</span>
-                </a>
-                
-                <a href="{% url 'allproperties' %}" class="list-group-item list-group-item-action py-2 ripple">
-                    <span>All Properties</span>
-                </a>
-
-                {% elif i.name == "Builder" %}
-                <a href="{% url 'addproject' %}" class="list-group-item list-group-item-action py-2 ripple">
-                    <span>Add Projects</span>
-                </a>
-                
-                <a href="{% url 'addproject' %}" class="list-group-item list-group-item-action py-2 ripple">
-                    <span>All Projects</span>
-                </a>
-                {% endif %}
-                {% endfor %}
             </div>
         </div>
     </nav>

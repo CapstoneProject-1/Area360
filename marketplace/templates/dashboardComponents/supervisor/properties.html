@@ -1,13 +1,13 @@
 {% extends "dashboardComponents/dashboard.html" %}
-{% load static %}
 
+{% load static %}
 {% block title %}
-Dashboard | seller
+Property | supervisor
 {% endblock title %}
 
 {% block body %}
 
-{% include "dashboardComponents/dashboardmenu.html" %}
+{% include "dashboardComponents/supervisor/menu.html" %}
 <main>
     <div class="container">
         <br>
@@ -17,27 +17,32 @@ Dashboard | seller
             <thead class="bg-light">
                 <tr>
                     <!-- <th scope="col">Sr.No.</th> -->
+                    <!-- <th scope="col" class="fw-bold">Property Image</th> -->
                     <th scope="col" class="fw-bold">Property type</th>
                     <th scope="col" class="fw-bold">Purpose</th>
                     <th scope="col" class="fw-bold">Address</th>
                     <th scope="col" class="fw-bold">city</th>
                     <th scope="col" class="fw-bold">state</th>
-                    <th scope="col" class="fw-bold">status</th>
+                    <th scope="col" class="fw-bold">Verify</th>
                 </tr>
             </thead>
             <tbody>
                 {% for i in properties %}
                 <tr>
+                    <!-- <td><img src="{{ i.image1.url }}" alt="" style="height: 3rem; object-fit: cover;" /></td> -->
                     <td>{{ i.property_type }}</td>
                     <td>{{ i.property_purpose }}</td>
                     <td>{{ i.property_address }}</td>
                     <td>{{ i.property_city }}</td>
                     <td>{{ i.property_state }}</td>
-                    {% if i.is_verified %}
-                    <td><span class="badge badge-success rounded-pill d-inline">Verified</span></td>
-                    {% else %}
-                    <td><span class="badge badge-danger rounded-pill d-inline">Not verified</span></td>
-                    {% endif %}
+                    <td>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="slug" id="" placeholder="" value="{{ i.property_no }}"
+                                placeholder="{{ i.property_no }}"  style="display: none;">
+                            <input type="submit" value="Verify" class="btn btn-danger" />
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

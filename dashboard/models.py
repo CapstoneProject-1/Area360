@@ -51,13 +51,14 @@ class Property(models.Model):
     property_bountry_wall = models.CharField(
         max_length=20, null=True, blank=True)
     property_furnished_status = models.CharField(
-        max_length=50, choices=furnished, null=True, blank=True, default="less than 5 years")
+        max_length=50, choices=furnished, null=True, blank=True, default="No Furnished")
     # property_monthly_rent = models.IntegerField(null=True, blank=True)
     # property_maintenance_charges = models.IntegerField(null=True, blank=True)
     # property_price = models.IntegerField(null=True, blank=True)
     # property_booking_price = models.IntegerField(null=True, blank=True)
     dynamic_fields = models.JSONField(default=None)
     is_verified = models.BooleanField(default=False)
+    property_no = models.CharField(max_length=100, unique=True, null=True, blank=True)
 
     def __str__(self):
         return self.property_type
@@ -71,3 +72,27 @@ class Property_image(models.Model):
     image4 = models.ImageField(upload_to="images/", default="")
     image5 = models.ImageField(upload_to="images/", default="")
     slug = models.SlugField(unique=True)
+
+
+class Project(models.Model):
+    furnished = (
+        ('Full Furnished', 'Full Furnished'),
+        ('No Furnished', 'No Furnished'),
+    )
+
+    builder = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    property_type = models.CharField(max_length=50)
+    property_address = models.CharField(max_length=200)
+    property_state = models.CharField(max_length=100)
+    property_city = models.CharField(max_length=100)
+    dynamic_fields = models.JSONField(default=None)
+    property_furnished_status = models.CharField(max_length=50, choices=furnished, null=True, blank=True, default="No Furnished")
+    is_verified = models.BooleanField(default=False)
+    image1 = models.ImageField(upload_to="images/")
+    image2 = models.ImageField(upload_to="images/", default="")
+    image3 = models.ImageField(upload_to="images/", default="")
+    image4 = models.ImageField(upload_to="images/", default="")
+    image5 = models.ImageField(upload_to="images/", default="")
+    booklet = models.FileField(upload_to="booklet/", default="")
+    slug = models.SlugField(unique=True)
+

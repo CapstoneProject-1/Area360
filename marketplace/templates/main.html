@@ -73,7 +73,7 @@
         </div>
         {% endif %}
       </div>
-      
+
       {% if user.is_authenticated %}
       <div class="dropdown me-3">
         <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
@@ -83,7 +83,11 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
           <li>
+            {% if user.is_staff %}
+            <a class="dropdown-item" href="{% url 'sdashboard' %}">Dashboard</a>
+            {% else %}
             <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
+            {% endif %}
           </li>
           <li>
             <a class="dropdown-item" href="#">Profile</a>
@@ -231,6 +235,22 @@
 
   <!-- Custom scripts -->
   <script type="text/javascript" sec="{% static 'js/script.js' %}"></script>
+
+
+  <!-- chatbot -->
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/641e9f2d4247f20fefe7e0f5/1gsbprjhb';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
 </body>
 
 </html>

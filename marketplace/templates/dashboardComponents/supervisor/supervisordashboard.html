@@ -1,12 +1,13 @@
 {% extends "dashboardComponents/dashboard.html" %}
+
 {% load static %}
 {% block title %}
-Dashboard | seller
+Dashboard | supervisor
 {% endblock title %}
 
 {% block body %}
 
-{% include "dashboardComponents/dashboardmenu.html" %}
+{% include "dashboardComponents/supervisor/menu.html" %}
 <main>
     <div class="container-fluid">
         <div class="py-5 mb-5">
@@ -16,7 +17,7 @@ Dashboard | seller
                         <div class="card-body text-center">
                             <h4 class="card-title fw-bold text-primary">Properties listed</h4>
                             <h5 class="card-text mt-4">
-                                {{total_properties}}
+                                {{properties}}
                             </h5>
                         </div>
                     </div>
@@ -26,7 +27,7 @@ Dashboard | seller
                         <div class="card-body text-center">
                             <h4 class="card-title fw-bold text-primary">Properties verified</h4>
                             <h5 class="card-text mt-4">
-                                {{verified_properties}}
+                                {{verify}}
                             </h5>
                         </div>
                     </div>
@@ -35,4 +36,5 @@ Dashboard | seller
         </div>
     </div>
 </main>
+
 {% endblock body %}
