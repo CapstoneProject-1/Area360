@@ -5,7 +5,7 @@
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar bg-white ">
         <div class="position-sticky">
             <div class="list-group list-group-flush mx-2 mt-4">
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <a href="{% url 'sdashboard' %}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
                     <span>Dashboard</span>
                 </a>
                 <a href="{% url 'propertyverification' %}" class="list-group-item list-group-item-action py-2 ripple">
@@ -29,7 +29,7 @@
             </button>
 
             <!-- Brand -->
-            <span class="navbar-brand mb-0 h1 fw-bolder text-primary">Area360</span>
+            <span class="navbar-brand mb-0 h1 fw-bolder text-primary"><a href="{% url 'realestate:index' %}">Area360</a></span>
             <!-- Right links -->
             <ul class="navbar-nav d-flex flex-row">
                 <!-- Avatar -->
@@ -41,7 +41,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="#">My profile</a>
+                            <a class="dropdown-item" href="{% url 'realestate:profile' %}">My profile</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">Settings</a>

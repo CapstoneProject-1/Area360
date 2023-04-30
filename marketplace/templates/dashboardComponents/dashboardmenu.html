@@ -7,11 +7,11 @@
             <div class="list-group list-group-flush mx-2 mt-4">
                 {% for i in groups %}
                 {% if i.name == "Seller" %}
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <a href="{% url 'dashboard' %}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
                     <span>{{ i.name }} Dashboard</span>
                 </a>
                 {% elif i.name == "Builder" %}
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <a href="{% url 'dashboard' %}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
                     <span>{{ i.name }} Dashboard</span>
                 </a>
                 {% endif %}
@@ -36,7 +36,7 @@
                     <span>Add Projects</span>
                 </a>
                 
-                <a href="{% url 'addproject' %}" class="list-group-item list-group-item-action py-2 ripple">
+                <a href="{% url 'allprojects' %}" class="list-group-item list-group-item-action py-2 ripple">
                     <span>All Projects</span>
                 </a>
                 {% endif %}
@@ -56,7 +56,7 @@
             </button>
 
             <!-- Brand -->
-            <span class="navbar-brand mb-0 h1 fw-bolder text-primary">Area360</span>
+            <span class="navbar-brand mb-0 h1 fw-bolder text-primary"><a href="{% url 'realestate:index' %}">Area360</a></span>
             <!-- Right links -->
             <ul class="navbar-nav d-flex flex-row">
                 <!-- Avatar -->
@@ -68,7 +68,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="#">My profile</a>
+                            <a class="dropdown-item" href="{% url 'realestate:profile' %}">My profile</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">Settings</a>

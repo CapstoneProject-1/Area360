@@ -9,6 +9,7 @@ Dashboard | seller
 {% include "dashboardComponents/dashboardmenu.html" %}
 <main>
     <div class="container-fluid">
+        {% for i in groups %}
         <div class="py-5 mb-5">
             <div class="row row-cols-1 row-cols-md-2 g-2">
                 <div class="col">
@@ -16,7 +17,12 @@ Dashboard | seller
                         <div class="card-body text-center">
                             <h4 class="card-title fw-bold text-primary">Properties listed</h4>
                             <h5 class="card-text mt-4">
+                                {% if i.name == "Seller" %} 
                                 {{total_properties}}
+                                {% endif %}
+                                {% if i.name == "Builder" %} 
+                                {{total_projects}}
+                                {% endif %}
                             </h5>
                         </div>
                     </div>
@@ -26,13 +32,19 @@ Dashboard | seller
                         <div class="card-body text-center">
                             <h4 class="card-title fw-bold text-primary">Properties verified</h4>
                             <h5 class="card-text mt-4">
+                                {% if i.name == "Seller" %} 
                                 {{verified_properties}}
+                                {% endif %}
+                                {% if i.name == "Builder" %} 
+                                {{verified_projects}}
+                                {% endif %}
                             </h5>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
 </main>
 {% endblock body %}

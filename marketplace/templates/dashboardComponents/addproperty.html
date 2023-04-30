@@ -172,11 +172,11 @@ Dashboard | seller
                     <div class="row">
                         <div class="col-md-6">
                             <label for="" class="mb-2">Monthly rent</label><br>
-                            <input type="number" name="mrent" class="form-control" placeholder="" />
+                            <input type="text" name="mrent" class="form-control" placeholder="" />
                         </div>
                         <div class="col-md-6">
                             <label for="" class="mb-2">Maintenance charges (Monthly fix)</label><br>
-                            <input type="number" name="mc" class="form-control" placeholder="" />
+                            <input type="text" name="mc" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>
@@ -188,13 +188,13 @@ Dashboard | seller
                         <!-- price -->
                         <div class="col-md-6">
                             <label for="" class="mb-2">Price</label><br>
-                            <input type="number" name="price" class="form-control" placeholder="" />
+                            <input type="text" name="price" class="form-control" placeholder="" />
                         </div>
 
                         <!-- Booking price -->
                         <div class="col-md-6">
                             <label for="" class="mb-2">Booking price</label><br>
-                            <input type="number" name="bprice" class="form-control" placeholder="" />
+                            <input type="text" name="bprice" class="form-control" placeholder="" />
                         </div>
                     </div>
                 </div>
@@ -236,6 +236,7 @@ Dashboard | seller
                 $("#renting").show();
                 $("#rd").show();
                 $("#aoc").show();
+                $("#pd").hide();
             }
             if (value == "Sell") {
                 $("#renting").hide();

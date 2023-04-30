@@ -1,0 +1,122 @@
+{% extends "main.html" %}
+{% load static %}
+{% block title %}
+Project | Area360
+{% endblock title %}
+
+{% block body %}
+
+{% for i in projects %}
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <script>
+        alert('{{ message }}');
+    </script>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="container my-5 w-75">
+    <div class="btn-outline-light py-4">
+        <h1>{{i.projectname}}</h1>
+        <p>by {{i.companyname}}</p>
+        <a href="#" class="ripple">
+            <img class="img-fluid" src="{{i.image1.url}}" alt="" style="width:66rem">
+        </a>
+        <a class="btn btn-primary mt-2" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Show all images..</a>
+        <a class="btn btn-success mt-2" aria-label="Chat on WhatsApp" href="https://wa.me/{{ i.builder.phoneno }}"><i
+                class="fab fa-whatsapp"></i> Chat on
+            WhatsApp</a>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">All images</h5>
+                    </div>
+                    <div class="modal-body w-100">
+                        <img class="img-fluid my-2" src="{{i.image1.url}}" alt="">
+                        <img class="img-fluid my-2" src="{{i.image2.url}}" alt="">
+                        <img class="img-fluid my-2" src="{{i.image3.url}}" alt="">
+                        <img class="img-fluid my-2" src="{{i.image4.url}}" alt="">
+                        <img class="img-fluid my-2" src="{{i.image5.url}}" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-mdb-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <h4 class="mt-4 col-md-9">All details</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered border my-2">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">Project</td>
+                            <td>{{ i.projectname }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Property type</td>
+                            <td>{{ i.property_type }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Area</td>
+                            <td>{{ i.dynamic_fields.property_area }} sq-ft.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Address</td>
+                            <td>{{ i.property_address }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">City</td>
+                            <td>{{ i.property_city }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">State</td>
+                            <td>{{ i.property_state }}</td>
+                        </tr>
+                        {% if i.property_posting %}
+                        <tr>
+                            <td colspan="2">Property posting as</td>
+                            <td>{{ i.property_posting }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if i.property.dynamic_fields.property_total_floors %}
+                        <tr>
+                            <td colspan="2">Total floors</td>
+                            <td>{{ i.dynamic_fields.property_total_floors }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if i.property_furnished_status %}
+                        <tr>
+                            <td colspan="2">Furnished status</td>
+                            <td>{{ i.property_furnished_status }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td colspan="2">Price</td>
+                            <td>{{ i.dynamic_fields.property_price }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Booking Price</td>
+                            <td>{{ i.dynamic_fields.property_booking_price }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Company name</td>
+                            <td>{{ i.companyname }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <h4>Download Booklet</h4>
+                <a href="{{i.booklet.url}}" class="btn btn-primary" download>Download</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock body %}

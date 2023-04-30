@@ -16,9 +16,11 @@ urlpatterns = [
     
     path('marketplace/',views.marketplace, name="marketplace"),
     path('property/<slug>',views.property, name="property"),
+    path('project/<slug>',views.project, name="project"),
     
     path('contact/',views.contact, name="contact"),
     path('about/',views.about, name="about"),
+    path('profile/',views.profile, name="profile"),
     path('terms&conditions/',views.tc, name="tc"),
     path('privacypolicy/',views.privacypolicy, name="privacypolicy"),
 ]

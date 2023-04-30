@@ -39,7 +39,7 @@ Property | supervisor
                         <form action="" method="post">
                             {% csrf_token %}
                             <input type="text" name="slug" id="" placeholder="" value="{{ i.slug }}"
-                                placeholder="{{ i.slug }}">
+                                placeholder="{{ i.slug }}" style="display: none;">
                             <input type="submit" value="Verify" class="btn btn-danger" />
                         </form>
                     </td>

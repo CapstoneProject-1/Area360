@@ -8,7 +8,9 @@ urlpatterns = [
     path('properties/addproperty',views.addproperty, name="addproperty"),
     path('properties/addproject',views.addproject, name="addproject"),
     path('properties/allproperties',views.allproperties, name="allproperties"),
+    path('properties/allproject',views.allprojects, name="allprojects"),
     path('supervisor/',views.supervisordashboard, name="sdashboard"),
     path('supervisor/properties',views.property_verification, name="propertyverification"),
     path('supervisor/projects',views.project_verification, name="projectverification"),
+    # path('builder/projects/delete',views.project_delete, name="projectdelete"),
 ]

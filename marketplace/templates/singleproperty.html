@@ -24,7 +24,9 @@ Property | Area360
             <img class="img-fluid" src="{{i.image1.url}}" alt="">
         </a>
         <a class="btn btn-primary mt-2" data-mdb-toggle="modal" data-mdb-target="#exampleModal">Show all images..</a>
-        <a class="btn btn-success mt-2" aria-label="Chat on WhatsApp" href="https://wa.me/{{ i.property.user_seller.phoneno }}"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+        <a class="btn btn-success mt-2" aria-label="Chat on WhatsApp"
+            href="https://wa.me/{{ i.property.user_seller.phoneno }}"><i class="fab fa-whatsapp"></i> Chat on
+            WhatsApp</a>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -86,12 +88,20 @@ Property | Area360
                 <table class="table table-bordered border my-2">
                     <tbody>
                         <tr>
+                            <td colspan="2">Sell/Rent</td>
+                            <td>{{ i.property.property_purpose }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Property type</td>
+                            <td>{{ i.property.property_type }}</td>
+                        </tr>
+                        <tr>
                             <td colspan="2">Area</td>
                             <td>{{ i.property.dynamic_fields.property_area }} sq-ft.</td>
                         </tr>
                         <tr>
-                            <td colspan="2">Total floors</td>
-                            <td>{{ i.property.dynamic_fields.property_total_floors }}</td>
+                            <td colspan="2">Address</td>
+                            <td>{{ i.property.property_address }}</td>
                         </tr>
                         <tr>
                             <td colspan="2">City</td>
@@ -101,14 +111,46 @@ Property | Area360
                             <td colspan="2">State</td>
                             <td>{{ i.property.property_state }}</td>
                         </tr>
+                        {% if i.property.property_posting %}
+                        <tr>
+                            <td colspan="2">Property posting as</td>
+                            <td>{{ i.property.property_posting }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if i.property.dynamic_fields.property_total_floors %}
+                        <tr>
+                            <td colspan="2">Total floors</td>
+                            <td>{{ i.property.dynamic_fields.property_total_floors }}</td>
+                        </tr>
+                        {% endif %}
+
+                        {% if i.property_furnished_status %}
+                        <tr>
+                            <td colspan="2">Furnished status</td>
+                            <td>{{ i.property_furnished_status }}</td>
+                        </tr>
+                        {% endif %}
+
+                        {% if i.property.dynamic_fileds.property_price %}
                         <tr>
                             <td colspan="2">Price</td>
                             <td>{{ i.property.dynamic_fields.property_price }}</td>
                         </tr>
                         <tr>
-                            <td colspan="2">Price</td>
-                            <td>{{ i.property.dynamic_fields.property_price }}</td>
+                            <td colspan="2">Booking Price</td>
+                            <td>{{ i.property.dynamic_fields.property_booking_price }}</td>
                         </tr>
+                        {% endif %}
+                        {% if i.property.dynamic_fileds.property_monthly_rent %}
+                        <tr>
+                            <td colspan="2">Rent Price</td>
+                            <td>{{ i.property.dynamic_fields.monthly_rent }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Booking Price</td>
+                            <td>{{ i.property.dynamic_fields.property_booking_price }}</td>
+                        </tr>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>

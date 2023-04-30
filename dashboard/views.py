@@ -31,8 +31,11 @@ def dashboard(request):
     verified_properties = Property.objects.filter(
         user_seller=profile, is_verified=True).count()
     groups = group(request)
+
+    total_projects = Project.objects.filter(builder=profile).count()
+    verified_projects = Project.objects.filter(builder=profile,is_verified=True).count()
     context = {"groups": groups, "total_properties": total_properties,
-               "verified_properties": verified_properties}
+               "verified_properties": verified_properties, "total_projects":total_projects, "verified_projects":verified_projects}
     return render(request, 'dashboardComponents/maindashboard.html', context)
 
 
@@ -150,6 +153,8 @@ def addproject(request):
                "groups": groups, "property_type": property_type}
     
     if request.method == "POST":
+        projectname = request.POST.get('projectname')
+        companyname = request.POST.get('companyname')
         property_type = request.POST.get('property_type')
         address = request.POST.get('address')
         state = request.POST.get('state')
@@ -171,6 +176,8 @@ def addproject(request):
 
         project_obj = Project(
             builder=user,
+            projectname =projectname,
+            companyname = companyname,
             property_type=property_type,
             property_address= address,
             property_state=state,
@@ -199,8 +206,23 @@ def allproperties(request):
     profile = Profile.objects.get(user=request.user)
     properties = Property.objects.filter(user_seller=profile)
     groups = group(request)
+    if request.method == "POST":
+        slug = request.POST.get('slug')
+        property = Property.objects.get(user_seller=profile,property_no=slug)
+        property.delete()
     context = {"groups": groups, "properties": properties}
     return render(request, 'dashboardComponents/allproperties.html', context)
+
+def allprojects(request):
+    profile = Profile.objects.get(user=request.user)
+    projects = Project.objects.filter(builder=profile)
+    groups = group(request)
+    if request.method == "POST":
+        slug = request.POST.get('slug')
+        project = Project.objects.get(builder=profile,slug=slug)
+        project.delete()
+    context = {"groups": groups, "projects": projects}
+    return render(request, 'dashboardComponents/allproject.html', context)
 
 
 @login_required
@@ -235,3 +257,9 @@ def project_verification(request):
     projects = Project.objects.filter(is_verified=False)
     context = {"projects": projects}
     return render(request,'dashboardComponents/supervisor/projects.html',context)
+
+# def project_delete(request):
+    
+#     project = Project.objects.all()
+#     context = {"projects": project}
+#     return render(request,'dashboardComponents/allproject.html',context)

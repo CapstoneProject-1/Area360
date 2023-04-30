@@ -14,7 +14,8 @@ from django.core.mail import send_mail
 # Create your views here.
 def index(request):
     properties = Property_image.objects.all()[0:20]
-    context = {"properties": properties}
+    project = Project.objects.filter(is_verified=True)[0:2]
+    context = {"properties": properties, "project":project}
     return render(request, 'index.html', context)
 
 
@@ -206,16 +207,36 @@ def marketplace(request):
 
 def property(request, slug):
     property1 = Property_image.objects.filter(slug=slug)
-    profile = Profile.objects.filter()
-    context = {"propertydetails": property1, "profile": profile}
-
-    # if request.method == "POST":
-    #     name = request.POST.get('name')
-    #     contactno = request.POST.get('contactno')
-    #     property_obj = Property(property)
-    #     obj = Buyer(property=property_obj, name=name,contactno=contactno)
-    #     print(obj)
-    #     obj.save()
-    #     if request.user == "Buyer":
-    #         messages.success(request, 'Your request send to the seller.')
+    # profile = Profile.objects.filter()
+    context = {"propertydetails": property1}
     return render(request, 'singleproperty.html', context)
+
+def project(request, slug):
+    project = Project.objects.filter(slug=slug)
+    print(project)
+    # profile = Profile.objects.filter()
+    context = {"projects": project}
+    return render(request, 'singleproject.html', context)
+
+
+def profile(request):
+    profile = Profile.objects.filter(user = request.user)
+    context = {"profile": profile}
+    if request.method == 'POST':
+        cp = request.POST.get('currentpassword')
+        np = request.POST.get('newpassword')
+        print(cp)
+        print(np)
+
+        user = User.objects.get(username = request.user)
+
+        user.check_password(cp)
+        if user.check_password(cp):
+            user.set_password(np)
+            user.save()
+            messages.success(request, 'Your password successfully changed.')
+        else:
+            return redirect('/profile')
+      
+          
+    return render(request, 'profile.html', context)

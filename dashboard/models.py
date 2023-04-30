@@ -37,8 +37,7 @@ class Property(models.Model):
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
     property_purpose = models.CharField(max_length=10, choices=type)
     property_type = models.CharField(max_length=50)
-    property_posting = models.CharField(
-        max_length=30, choices=posting_as_a, default="On sharing basis", null=True, blank=True)
+    property_posting = models.CharField(max_length=30, choices=posting_as_a, default="On sharing basis", null=True, blank=True)
     property_address = models.CharField(max_length=200)
     property_state = models.CharField(max_length=100)
     property_city = models.CharField(max_length=100)
@@ -81,6 +80,7 @@ class Project(models.Model):
     )
 
     builder = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    projectname = models.CharField(max_length=100, blank=True, null=True)
     property_type = models.CharField(max_length=50)
     property_address = models.CharField(max_length=200)
     property_state = models.CharField(max_length=100)
@@ -94,5 +94,10 @@ class Project(models.Model):
     image4 = models.ImageField(upload_to="images/", default="")
     image5 = models.ImageField(upload_to="images/", default="")
     booklet = models.FileField(upload_to="booklet/", default="")
+    companyname = models.CharField(max_length=100, null=True, blank=True)
     slug = models.SlugField(unique=True)
+    
+
+
+
 

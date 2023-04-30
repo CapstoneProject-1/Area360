@@ -1,0 +1,76 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block title %}
+Register | Area360
+{% endblock title %}
+
+{% block body %}
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <script>
+        alert('{{ message }}');
+    </script>
+    {% endfor %}
+</div>
+{% endif %}
+<style>
+    .gradient-custom {
+        background: #657bf6;
+        background: -webkit-linear-gradient(to right bottom, rgb(101, 116, 246), rgba(133, 181, 253, 0.897));
+        background: linear-gradient(to right bottom, rgb(101, 164, 246), rgb(133, 141, 253))
+    }
+</style>
+{% for i in profile %}
+<section class="vh-100" style="background-color: #f4f5f7;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-6 mb-4 mb-lg-0">
+                <div class="card mb-3" style="border-radius: .5rem;">
+                    <div class="row g-0">
+                        <div class="col-md-4 gradient-custom text-center text-white"
+                            style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                            <img src="{% static 'img/avatar.png' %}" alt="Avatar" class="img-fluid my-5"
+                                style="width: 80px;" />
+                            <h5>{{i.user.username}}</h5>
+                            <p>{{i.usertype}}</p>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body p-4">
+                                <h6>Information</h6>
+                                <hr class="mt-0 mb-4">
+                                <div class="row pt-1">
+                                    <div class="col-6 mb-3">
+                                        <h6>Email</h6>
+                                        <p class="text-muted">{{i.user.email}}</p>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <h6>Phone</h6>
+                                        <p class="text-muted">{{i.phoneno}}</p>
+                                    </div>
+                                </div>
+                                <h6>Change password</h6>
+                                <hr class="mt-0 mb-4">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <div class="input-group mb-4">
+                                        <input type="password" class="form-control" name="currentpassword"
+                                            placeholder="currentpassword" required />
+                                    </div>
+                                    <div class="input-group mb-4">
+                                        <input type="password" class="form-control" name="newpassword"
+                                            placeholder="newpassword" required />
+                                    </div>
+                                    <input type="submit" class="btn btn-primary" value="Change password" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+{% endblock body %}

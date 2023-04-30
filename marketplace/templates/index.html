@@ -48,55 +48,35 @@ Home | Area360
       <div class="container mt-5">
             <h2 class="h2-responsive text-center mb-0" id="home">Featured projects</h2>
       </div>
+
       <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
-            <a href="#" class="text-normal text-body">
+            {% for i in project %}
+            <a href="{% url 'realestate:project' slug=i.slug %}" class="text-normal text-body">
                   <div class="col">
                         <div class="card h-100">
-                              <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    class="card-img-top" alt="Skyscrapers" />
+                              <img src="{{i.image1.url}}"
+                                    class="card-img-top" alt="Skyscrapers" style="height:25.3rem; object-fit: cover;"/>
                               <div class="card-body d-flex items-center">
                                     <div>
-                                          <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                          <img src="{{i.image1.url}}"
                                                 alt="" class="featuredprojectlogo mx-2 md:mx-0"
                                                 style="height: 5rem; width: 5rem; object-fit: cover;">
                                     </div>
                                     <div class="mx-2">
-                                          <h5 class="card-title fw-bold">Project Name</h5>
-                                          <p class="mb-0">by Spectrum Properties</p>
-                                          <p class="mb-0">Kharadi, Pune</p>
+                                          <h5 class="card-title fw-bold">{{i.projectname}}</h5>
+                                          <p class="mb-0">by {{i.companyname}}</p>
+                                          <p class="mb-0">{{i.property_city}}, {{i.property_state}}</p>
                                     </div>
                                     <div class="mx-auto">
-                                          <p class="mb-0 text-end">2,3 bhk Flates</p>
-                                          <p class="mb-0"><b>1.23 Cr</b> onwords</p>
+                                          <p class="mb-0 text-end">2,3 bhk {{i.property_type}}</p>
+                                          <p class="mb-0"><b>{{i.dynamic_fields.property_price}}</b> onwords</p>
                                     </div>
                               </div>
                         </div>
                   </div>
             </a>
-            <a href="#" class="text-normal text-body">
-                  <div class="col">
-                        <div class="card h-100">
-                              <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    class="card-img-top" alt="Skyscrapers" />
-                              <div class="card-body d-flex items-center">
-                                    <div>
-                                          <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                                alt="" class="featuredprojectlogo mx-2 md:mx-0"
-                                                style="height: 5rem; width: 5rem; object-fit: cover;">
-                                    </div>
-                                    <div class="mx-2">
-                                          <h5 class="card-title fw-bold">Project Name</h5>
-                                          <p class="mb-0">by Spectrum Properties</p>
-                                          <p class="mb-0">Kharadi, Pune</p>
-                                    </div>
-                                    <div class="mx-auto">
-                                          <p class="mb-0 text-end">2,3 bhk Flates</p>
-                                          <p class="mb-0"><b>1.23 Cr</b> onwords</p>
-                                    </div>
-                              </div>
-                        </div>
-                  </div>
-            </a>
+            {% endfor %}
+
       </div>
 </div>
 
